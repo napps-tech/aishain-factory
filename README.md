@@ -45,9 +45,12 @@ AI社員ファクトリーは、作りたい業務システムの説明から、
 
 - Node.js 20以上
 - pnpm
-- Codex JSON-RPC WebSocketサーバー
+- Codex CLI / Codexデスクトップアプリ
+- Codexにログイン済みの環境
 
-CodexサーバーなしでUIの流れだけ確認したい場合は、モックプロバイダーを使えます。
+通常起動では`codex app-server`を同時に立ち上げ、アプリから`ws://127.0.0.1:8080`へ接続します。業務フロー、DB設計、画面設計、画像生成、コード生成はCodex app serverを通して実行します。
+
+CodexなしでUIの流れだけ確認したい場合は、モックプロバイダーを使えます。
 
 ## セットアップ
 
@@ -57,6 +60,11 @@ pnpm build:app
 pnpm build:css
 pnpm start
 ```
+
+`pnpm start`は以下を同時に起動します。
+
+- `codex app-server --listen ws://127.0.0.1:8080`
+- `tsx src/server.ts`
 
 起動後、ブラウザで`http://localhost:8791`を開きます。
 
@@ -71,8 +79,10 @@ pnpm dev
 Codexサーバーを使わずに試す場合は、生成系をモックに切り替えて起動します。
 
 ```bash
-WORKFLOW_PROVIDER=mock DATABASE_PROVIDER=mock SCREEN_PROVIDER=mock pnpm dev
+WORKFLOW_PROVIDER=mock DATABASE_PROVIDER=mock SCREEN_PROVIDER=mock pnpm app:start
 ```
+
+watch付きで開発したい場合は、従来どおり`pnpm dev`も使えます。この場合、Codex app serverは自動起動しないため、必要に応じて別ターミナルで`pnpm codex:server`を実行してください。
 
 ## 環境変数
 
