@@ -5,10 +5,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "app:start": "tsx src/server.ts",
     "build:app": "tsc -p tsconfig.app.json",
     "build:css": "tailwindcss -i ./src/styles.css -o ./public/styles.css",
+    "codex:server": "codex app-server --listen ${CODEX_SERVER_WS_URL:-ws://127.0.0.1:8080}",
     "dev": "concurrently \"tailwindcss -i ./src/styles.css -o ./public/styles.css --watch\" \"tsc -p tsconfig.app.json --watch\" \"tsx watch src/server.ts\"",
-    "start": "tsx src/server.ts",
+    "start": "concurrently -k -n codex,app -c magenta,cyan \"pnpm codex:server\" \"pnpm app:start\"",
     "type-check": "tsc --noEmit && tsc -p tsconfig.app.json --noEmit"
   },
   "dependencies": {
