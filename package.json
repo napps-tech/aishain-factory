@@ -1,0 +1,29 @@
+{
+  "name": "aishain-factory",
+  "version": "0.1.0",
+  "description": "作りたい業務システムの説明から、業務フロー、データベース設計、画面一覧、ベースプロジェクトを組み立てるプロトタイプ。",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:app": "tsc -p tsconfig.app.json",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./public/styles.css",
+    "dev": "concurrently \"tailwindcss -i ./src/styles.css -o ./public/styles.css --watch\" \"tsc -p tsconfig.app.json --watch\" \"tsx watch src/server.ts\"",
+    "start": "tsx src/server.ts",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.app.json --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "hono": "^4.10.6",
+    "ws": "^8.18.3",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "@types/node": "^24.10.1",
+    "@types/ws": "^8.18.1",
+    "concurrently": "^9.2.1",
+    "tailwindcss": "^4.3.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

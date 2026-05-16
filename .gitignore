@@ -1,0 +1,8 @@
+node_modules/
+gen_src/
+.env
+.env.*
+!.env.example
+data/draft-*.yaml
+public/generated/*
+!public/generated/.gitkeep
